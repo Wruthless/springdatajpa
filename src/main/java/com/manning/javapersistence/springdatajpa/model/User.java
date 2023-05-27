@@ -6,6 +6,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 
 @Entity
@@ -19,6 +20,12 @@ public class User {
     private String username;
 
     private LocalDate registrationDate;
+
+    private String email;
+
+    private int level;
+
+    private boolean active;
 
     public User() {
     }
@@ -52,6 +59,30 @@ public class User {
         this.registrationDate = registrationDate;
     }
 
+    public String getEmail( ) {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public int getLevel( ) {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
+    public boolean isActive( ) {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -59,6 +90,19 @@ public class User {
                 ", username='" + username + '\'' +
                 ", registrationDate=" + registrationDate +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass( ) != o.getClass( )) return false;
+        User user = (User) o;
+        return id.equals(user.id);
+    }
+
+    @Override
+    public int hashCode( ) {
+        return Objects.hash(id);
     }
 
 
