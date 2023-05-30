@@ -43,4 +43,5 @@ public interface UserRepository extends JpaRepository<User, Long> {
     List<User> findByRegistrationDateNotIn(Collection<LocalDate> dates);
 
 
+
 }

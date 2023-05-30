@@ -20,18 +20,18 @@ public class SpringdatajpaApplication {
         SpringApplication.run(SpringdatajpaApplication.class, args);
     }
 
-    @Bean
-    public ApplicationRunner configure(UserRepository userRepository) {
-        return env -> {
-            User user1 = new User("beth", LocalDate.of(2020, Month.AUGUST, 3));
-            User user2 = new User("bob", LocalDate.of(2020, Month.JANUARY, 18));
-
-            userRepository.save(user1);
-            userRepository.save(user2);
-
-            userRepository.findAll( ).forEach(System.out::println);
-        };
-    }
+//    @Bean
+//    public ApplicationRunner configure(UserRepository userRepository) {
+//        return env -> {
+//            User user1 = new User("beth", LocalDate.of(2020, Month.AUGUST, 3));
+//            User user2 = new User("bob", LocalDate.of(2020, Month.JANUARY, 18));
+//
+//            userRepository.save(user1);
+//            userRepository.save(user2);
+//
+//            userRepository.findAll( ).forEach(System.out::println);
+//        };
+//    }
 
 
 }
