@@ -2,7 +2,11 @@ package com.manning.javapersistence.springdatajpa.repositories;
 
 
 import com.manning.javapersistence.springdatajpa.model.User;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.util.Streamable;
 
 import java.time.LocalDate;
 import java.util.Collection;
@@ -42,6 +46,21 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     List<User> findByRegistrationDateNotIn(Collection<LocalDate> dates);
 
+    User findFirstByOrderByUsernameAsc();
 
+    User findTopByOrderByRegistrationDateDesc();
+
+    @Override
+    Page<User> findAll(Pageable pageable);
+
+    List<User> findFirst2ByLevel(int level, Sort sort);
+
+    List<User> findByLevel(int level, Sort sort);
+
+    List<User> findByActive(boolean active, Pageable pageable);
+
+    Streamable<User> findByEmailContaining(String text);
+
+    Streamable<User> findByLevel(int level);
 
 }
