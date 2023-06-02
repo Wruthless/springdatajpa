@@ -32,7 +32,7 @@ abstract class SpringdatajpaApplicationTests {
 		List<User> users = new ArrayList<>();
 
 		User john = new User("john", LocalDate.of(2020, Month.APRIL, 13));
-		john.setEmail("upchh@example.com");
+		john.setEmail("john@somedomain.com");
 		john.setLevel(1);
 		john.setActive(true);
 

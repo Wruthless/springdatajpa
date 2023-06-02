@@ -6,6 +6,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.data.util.Streamable;
 
 import java.time.LocalDate;
@@ -63,4 +65,29 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     Streamable<User> findByLevel(int level);
 
+    // Custom queries.
+
+    // Return the number of active users.
+    @Query("select count(u) from User u where u.active = ?1")
+    int findNumberOfUsersByActivity(boolean active);
+
+    // Return users with the level and active status given as named parameters.
+    @Query("select u from User u where u.level = :level and u.active = :active")
+    List<User> findByLevelAndActive(@Param("level") int level, @Param("active") boolean active);
+
+    // Returns the number of users with a given active status. This query is written in
+    // native SQL (nativeQuery = true).
+    @Query(value = "SELECT COUNT(*) FROM USERS WHERE ACTIVE = ?1", nativeQuery = true)
+    int findNumberOfUsersByActivityNative(boolean active);
+
+    // Return a list of arrays, with each array containing the username and the length of the email
+    // after filtering based on the username. The second Sort parameter is used to sort the results.
+    @Query("select u.username, LENGTH(u.email) as email_length from #{#entityName} u where u.username like %?1%")
+    List<Object[]> findByAsArrayAndSort(String text, Sort sort);
+
+    <T> List<T> findByEmail(String username, Class<T> type);
+
+    List<Projection.UserSummary> findByRegistrationDateAfter(LocalDate date);
+
+    List<Projection.UsernameOnly> findByEmail(String username);
 }
