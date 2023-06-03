@@ -86,6 +86,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
     List<Object[]> findByAsArrayAndSort(String text, Sort sort);
 
     <T> List<T> findByEmail(String username, Class<T> type);
+    //<T> List<T> findByRegistrationDateAfter(LocalDate date, Class<T> type);
 
     List<Projection.UserSummary> findByRegistrationDateAfter(LocalDate date);
 

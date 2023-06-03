@@ -27,6 +27,12 @@ public class ProjectionTest extends SpringdatajpaApplicationTests {
         );
     }
 
+    // Replace above with generic test.
+    @Test
+    void dynamicTestProjectionUsername() {
+
+    }
+
     @Test
     void testProjectionUserSummary( ) {
         List<Projection.UserSummary> users = userRepository.
@@ -59,5 +65,6 @@ public class ProjectionTest extends SpringdatajpaApplicationTests {
         List<Projection.UserSummary> userSummaries = userRepository
                 .findByEmail("mike@somedomain.com",Projection.UserSummary.class);
     }
+
 
 }
